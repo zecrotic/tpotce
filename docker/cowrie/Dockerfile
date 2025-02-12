@@ -15,6 +15,7 @@ RUN apk --no-cache -U upgrade && \
 		mpc1-dev \
 		mpfr-dev \
 		openssl \
+  		openssh \
 		openssl-dev \
 		py3-appdirs \
 		py3-asn1-modules \
@@ -48,6 +49,11 @@ RUN apk --no-cache -U upgrade && \
     # cp /root/dist/requirements.txt . && \
     pip3 install --break-system-packages --upgrade --no-cache-dir pip && \
     pip3 install --break-system-packages --no-cache-dir -r requirements.txt && \
+#
+# Setup SSH directory for cowrie user
+    mkdir -p /home/cowrie/.ssh && \
+    chmod 700 /home/cowrie/.ssh && \
+    chown cowrie:cowrie -R /home/cowrie/.ssh && \
 #
 # Setup configs
     setcap cap_net_bind_service=+ep $(readlink -f $(type -P python3)) && \
