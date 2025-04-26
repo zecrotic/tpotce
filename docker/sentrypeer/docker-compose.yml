@@ -19,8 +19,10 @@ services:
      - sentrypeer_local
     ports:
 #     - "4222:4222/udp"
-     - "5060:5060/udp"
-     - "5060:5060/tcp"
+     #- "5060:5060/udp" #5060 is used in unencrypted SIP messages
+     #- "5060:5060/tcp"
+     - "5061:5061/udp" #UDP port 5061 uses TLS to transport voice and video calls
+     - "5061:5061/tcp" #TCP port 5061 uses TLS to transport voice and video calls
 #     - "127.0.0.1:8082:8082"
     image: "dtagdevsec/sentrypeer:24.04"
     read_only: true
